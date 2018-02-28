@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { BackHandler } from "react-native"
 import {
 	addNavigationHelpers,
+	NavigationActions,
 } from 'react-navigation'
 import { Provider, connect } from "react-redux"
 
@@ -13,6 +15,36 @@ import {
 
 @connect(state => ({ nav: state.nav }))
 class AppWithNavigationState extends Component {
+	constructor(props) {
+		super(props)
+
+		this.onBackPress = this.onBackPress.bind(this)
+	}
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  onBackPress = () => {
+    const { dispatch, nav } = this.props
+    if (nav.index !== 0) {
+	    dispatch(NavigationActions.back())
+			return true
+    }
+
+		const stackNavigators = nav.routes[0].routes
+		if (stackNavigators.some(nav => nav.index !== 0)) {
+	    dispatch(NavigationActions.back())
+			return true
+		}
+
+		return false
+  }
+
 	render() {
 		return (
 			<AppNavigator
@@ -22,7 +54,7 @@ class AppWithNavigationState extends Component {
 					addListener,
 				})}
 			/>
-		);
+		)
 	}
 }
 
