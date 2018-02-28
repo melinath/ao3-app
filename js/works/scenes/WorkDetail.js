@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-import styles from '../styles'
+import styles from '../../styles'
 
 export default class WorkDetail extends React.Component {
 	static navigationOptions = ({ navigation }) => {

@@ -1,13 +1,27 @@
 import React, { PureComponent } from 'react'
 import { FlatList, Button, Text, View } from 'react-native'
-
-import cheerio from 'react-native-cheerio'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import WorkPreview from '../components/WorkPreview'
-import { extractWorkPreview } from '../utils'
-import styles from '../styles'
+import styles from '../../styles'
+import { loadRecentWorks } from '../actions'
 
-export default class Recent extends PureComponent {
+
+const mapStateToProps = (state) => {
+	return state.works.recent || {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		actions: bindActionCreators({
+			loadRecentWorks,
+		}, dispatch)
+	}
+}
+
+
+class Recent extends PureComponent {
 	static navigationOptions = {
 		title: 'Recent works',
 	}
@@ -19,26 +33,10 @@ export default class Recent extends PureComponent {
 		this.fetchRecent = this.fetchRecent.bind(this)
 		this.renderEmpty = this.renderEmpty.bind(this)
 		this.renderItem = this.renderItem.bind(this)
-
-		this.state = {
-			isLoading: false,
-			works: []
-		}
 	}
 
 	fetchRecent() {
-		this.setState({isLoading: true}, () => {
-			fetch('https://archiveofourown.org/works')
-			.then(response => response.text())
-			.then(responseText => {
-				const $ = cheerio.load(responseText)
-				const works = $('li.work')
-				this.setState({
-					isLoading: false,
-					works: works.map((index, element) => extractWorkPreview($(element))),
-				})
-			})
-		})
+		this.props.actions.loadRecentWorks()
 	}
 
 	componentDidMount() {
@@ -46,7 +44,7 @@ export default class Recent extends PureComponent {
 	}
 
 	renderEmpty() {
-		if (this.state.isLoading) return null
+		if (this.props.isLoading) return null
 		return (
 			<Text style={[styles.paragraph, {paddingTop: 10}]}>
 				No works found
@@ -62,13 +60,16 @@ export default class Recent extends PureComponent {
 		return (
 			<View style={styles.scenes}>
 				<FlatList
-					data={this.state.works}
+					data={this.props.works}
 					ListEmptyComponent={this.renderEmpty}
 					onRefresh={this.fetchRecent}
 					renderItem={this.renderItem}
-					refreshing={this.state.isLoading}
+					refreshing={this.props.isLoading || false}
 				/>
 			</View>
 		)
 	}
 }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recent)

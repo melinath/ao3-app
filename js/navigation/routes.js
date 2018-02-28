@@ -1,6 +1,6 @@
-import WorkDetail from '../scenes/WorkDetail'
 import Home from '../scenes/Home'
-import Recent from '../scenes/Recent'
+import Recent from '../works/scenes/Recent'
+import WorkDetail from '../works/scenes/WorkDetail'
 
 
 export const home = {

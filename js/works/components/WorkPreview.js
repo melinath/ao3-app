@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { TouchableHighlight, View, Text } from 'react-native'
 
-import styles from '../styles'
+import styles from '../../styles'
 
 
 export default class WorkPreview extends PureComponent {
