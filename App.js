@@ -1,4 +1,4 @@
-import App from './app/App'
+import App from './js/App'
 
 
 export default App
