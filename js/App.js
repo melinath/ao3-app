@@ -1,45 +1,35 @@
+import React, { Component } from 'react'
 import {
-  DrawerNavigator,
-  StackNavigator,
+	addNavigationHelpers,
 } from 'react-navigation'
+import { Provider, connect } from "react-redux"
 
-import WorkDetail from './scenes/WorkDetail'
-import Home from './scenes/Home'
-import Recent from './scenes/Recent'
-
-const HomeStack = StackNavigator(
-	{
-		Home: { screen: Home },
-		Recent: { screen: Recent },
-		WorkDetail: { screen: WorkDetail },
-	},
-)
-
-const RecentStack = StackNavigator(
-	{
-		Recent: { screen: Recent },
-		WorkDetail: { screen: WorkDetail },
-	},
-	{
-		initialRouteName: 'Recent',
-	},
-)
+import store from './store'
+import {
+	addListener,
+	AppNavigator,
+} from './navigation'
 
 
-const Drawer = DrawerNavigator(
-	{
-		HomeStack: { screen: HomeStack },
-		RecentStack: { screen: RecentStack },
-	},
-	{
-		initialRouteName: 'HomeStack',
-	},
-)
-Drawer.navigationOptions = {
-	title: 'AO3 Unofficial',
+@connect(state => ({ nav: state.nav }))
+class AppWithNavigationState extends Component {
+	render() {
+		return (
+			<AppNavigator
+				navigation={addNavigationHelpers({
+					dispatch: this.props.dispatch,
+					state: this.props.nav,
+					addListener,
+				})}
+			/>
+		);
+	}
 }
 
-
-const App = Drawer
-
-export default App
+export default function App() {
+	return (
+		<Provider store={store}>
+			<AppWithNavigationState />
+		</Provider>
+	)
+}
