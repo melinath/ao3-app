@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { FlatList, Button, Text, View } from 'react-native'
 
 import cheerio from 'react-native-cheerio'
@@ -7,7 +7,7 @@ import WorkPreview from '../components/WorkPreview'
 import { extractWorkPreview } from '../utils'
 import styles from '../styles'
 
-export default class Recent extends Component {
+export default class Recent extends PureComponent {
 	static navigationOptions = {
 		title: 'Recent works',
 	}
@@ -55,7 +55,7 @@ export default class Recent extends Component {
 	}
 
 	renderItem({ item }) {
-		return <WorkPreview item={item} />
+		return <WorkPreview item={item} navigation={this.props.navigation} />
 	}
 
 	render() {
