@@ -10,6 +10,8 @@ import Recent from './scenes/Recent'
 const HomeStack = StackNavigator(
 	{
 		Home: { screen: Home },
+		Recent: { screen: Recent },
+		WorkDetail: { screen: WorkDetail },
 	},
 )
 

@@ -19,10 +19,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-cheerio": "^1.0.0-rc.4",
     "react-navigation": "^1.2.1"
   }
 }

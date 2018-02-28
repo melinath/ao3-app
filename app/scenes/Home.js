@@ -12,10 +12,10 @@ export default class Home extends React.Component {
 	render() {
 		return (
 			<View style={styles.scene}>
-				<Text>Homepage</Text>
+				<Text style={styles.jumbotron}>Welcome to the AO3 Unofficial app! Happy trails!</Text>
 				<Button
-					onPress={() => this.props.navigation.navigate('WorkDetail')}
-					title="View work"
+					onPress={() => this.props.navigation.navigate('Recent')}
+					title='View recent works'
 				/>
 			</View>
 		)
