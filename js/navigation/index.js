@@ -15,17 +15,14 @@ export const AppNavigator = DrawerNavigator(
 	{
 		HomeStack: { screen: StackNavigator(routes.home, { initialRouteName: 'Home' }) },
 		RecentStack: { screen: StackNavigator(routes.recent, { initialRouteName: 'Recent' }) },
-	},
-	{
-		initialRouteName: 'HomeStack',
-	},
+	}
 )
 
 
-const initialState = AppNavigator.router.getStateForAction(
-	AppNavigator.router.getActionForPathAndParams('Home')
-)
-
+const initialState = AppNavigator.router.getStateForAction({
+	routeName: 'HomeStack',
+	type: 'Navigation/NAVIGATE',
+})
 
 export const navReducer = (state = initialState, action) => {
   const nextState = AppNavigator.router.getStateForAction(action, state)
