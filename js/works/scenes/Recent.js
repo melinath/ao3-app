@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { FlatList, Button, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import type { NavigationScreenProp } from 'react-navigation'
 
 import WorkPreview from '../components/WorkPreview'
 import styles from '../../styles'
@@ -12,7 +13,7 @@ import type { NavigationState, WorkPreview as WorkPreviewType } from '../../type
 type Props = {
 	works: Array<WorkPreviewType>,
 	actions: { [key: string]: () => mixed },
-	navigation: NavigationState,
+	navigation: NavigationScreenProp<NavigationState>,
 }
 
 

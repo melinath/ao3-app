@@ -1,8 +1,6 @@
 import type {
-  NavigationParams,
-  NavigationNavigateAction,
-  NavigationEventCallback,
-  NavigationEventSubscription,
+  NavigationScreenProp,
+  NavigationStateRoute,
 } from 'react-navigation'
 
 export type WorkPreview = {
@@ -20,25 +18,16 @@ export type WorksState = {
   )
 }
 
-type NavigationRoute = {
-  index: number,
-  routeName: string,
-  routes: Array<NavigationRoute>,
-}
+type NavigationParams =
+  | { item: WorkPreview }
 
 export type NavigationState = {
-  state: { params: { item: WorkPreview }},
-  navigate: (
-    routeName: string,
-    params?: NavigationParams,
-    action?: NavigationNavigateAction
-  ) => boolean,
-  routes: Array<NavigationRoute>,
-}
+  params?: NavigationParams
+} & NavigationStateRoute
 
 export type State = {
   works: WorksState,
-  nav: NavigationState,
+  nav: NavigationScreenProp<NavigationState>,
 }
 
 export type Action =

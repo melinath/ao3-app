@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Button, Text, View } from 'react-native'
+import type { NavigationScreenProp } from 'react-navigation'
 
 import styles from '../styles'
 import type { NavigationState } from '../types'
 
 type Props = {
-	navigation: NavigationState,
+	navigation: NavigationScreenProp<NavigationState>,
 }
 
 export default class Home extends Component<Props> {

@@ -11,10 +11,16 @@ import {
 	addListener,
 	AppNavigator,
 } from './navigation'
-import type { NavigationState } from './types'
+
+
+type NavigationRoute = {
+	routes: Array<NavigationRoute>,
+	index: number,
+}
+
 
 type Props = {
-	nav: NavigationState,
+	nav: NavigationRoute,
 	dispatch: Dispatch,
 }
 
@@ -64,7 +70,7 @@ class AppWithNavigationState extends Component<Props> {
 }
 
 
-const mapStateToProps = (state) => ({nav: state.nav})
+const mapStateToProps: mapStateToProps = (state) => ({nav: state.nav})
 
 const Connected = connect(mapStateToProps)(AppWithNavigationState)
 

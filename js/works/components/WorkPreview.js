@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
 import { TouchableHighlight, View, Text } from 'react-native'
+import type { NavigationScreenProp } from 'react-navigation'
 
 import styles from '../../styles'
 import type { NavigationState, WorkPreview as WorkPreviewType } from '../../types'
 
 type Props = {
 	item: WorkPreviewType,
-	navigation: NavigationState,
+	navigation: NavigationScreenProp<NavigationState>,
 }
 
 

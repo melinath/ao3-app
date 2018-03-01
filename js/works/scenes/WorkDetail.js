@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import type { NavigationScreenProp } from 'react-navigation'
 
 import styles from '../../styles'
 import type { WorkPreview, NavigationState } from '../../types'
 
 
 type Props = {
-	navigation: NavigationState,
+	navigation: NavigationScreenProp<NavigationState>,
 }
 
 
@@ -20,7 +21,10 @@ export default class WorkDetail extends Component<Props> {
 	}
 
 	render() {
-		const { item } = this.props.navigation.state.params
+		const { params } = this.props.navigation.state
+		if (!params) return null
+
+		const { item } = params
 		return (
 			<View style={[styles.scene, styles.listItem]}>
 				<Text style={styles.listItemHeader}>{item.title}</Text>
