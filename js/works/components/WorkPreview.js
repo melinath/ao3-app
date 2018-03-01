@@ -2,13 +2,19 @@ import React, { PureComponent } from 'react'
 import { TouchableHighlight, View, Text } from 'react-native'
 
 import styles from '../../styles'
+import type { NavigationState, WorkPreview as WorkPreviewType } from '../../types'
+
+type Props = {
+	item: WorkPreviewType,
+	navigation: NavigationState,
+}
 
 
-export default class WorkPreview extends PureComponent {
-	constructor(props) {
-		super(props)
+export default class WorkPreview extends PureComponent<Props> {
+	constructor(props: Props) {
+		super(props);
 
-		this.onPress = this.onPress.bind(this)
+		(this:any).onPress = this.onPress.bind(this);
 	}
 
 	onPress() {
@@ -29,7 +35,7 @@ export default class WorkPreview extends PureComponent {
 			>
 				<View>
 					<Text style={styles.listItemHeader}>{title}</Text>
-					<Text style={styles.listItemSubHeader}>{author}</Text>
+					<Text>{author}</Text>
 				</View>
 			</TouchableHighlight>
 		)

@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import styles from '../../styles'
+import type { WorkPreview, NavigationState } from '../../types'
 
-export default class WorkDetail extends React.Component {
-	static navigationOptions = ({ navigation }) => {
+
+type Props = {
+	navigation: NavigationState,
+}
+
+
+export default class WorkDetail extends Component<Props> {
+	static navigationOptions = ({ navigation }: Props) => {
 		const { params } = navigation.state
 
 		return {
@@ -17,7 +24,7 @@ export default class WorkDetail extends React.Component {
 		return (
 			<View style={[styles.scene, styles.listItem]}>
 				<Text style={styles.listItemHeader}>{item.title}</Text>
-				<Text style={styles.listItemSubHeader}>{item.author}</Text>
+				<Text>{item.author}</Text>
 			</View>
 		)
 	}

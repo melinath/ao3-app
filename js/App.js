@@ -11,10 +11,15 @@ import {
 	addListener,
 	AppNavigator,
 } from './navigation'
+import type { NavigationState } from './types'
+
+type Props = {
+	nav: NavigationState,
+	dispatch: Dispatch,
+}
 
 
-@connect(state => ({ nav: state.nav }))
-class AppWithNavigationState extends Component {
+class AppWithNavigationState extends Component<Props> {
 	constructor(props) {
 		super(props)
 
@@ -32,13 +37,13 @@ class AppWithNavigationState extends Component {
   onBackPress = () => {
     const { dispatch, nav } = this.props
     if (nav.index !== 0) {
-	    dispatch(NavigationActions.back())
+	    dispatch(NavigationActions.back({ key: null }))
 			return true
     }
 
 		const stackNavigators = nav.routes[0].routes
 		if (stackNavigators.some(nav => nav.index !== 0)) {
-	    dispatch(NavigationActions.back())
+	    dispatch(NavigationActions.back({ key: null }))
 			return true
 		}
 
@@ -58,10 +63,16 @@ class AppWithNavigationState extends Component {
 	}
 }
 
+
+const mapStateToProps = (state) => ({nav: state.nav})
+
+const Connected = connect(mapStateToProps)(AppWithNavigationState)
+
+
 export default function App() {
 	return (
 		<Provider store={store}>
-			<AppWithNavigationState />
+			<Connected />
 		</Provider>
 	)
 }

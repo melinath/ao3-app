@@ -6,6 +6,14 @@ import { bindActionCreators } from 'redux'
 import WorkPreview from '../components/WorkPreview'
 import styles from '../../styles'
 import { loadRecentWorks } from '../actions'
+import type { NavigationState, WorkPreview as WorkPreviewType } from '../../types'
+
+
+type Props = {
+	works: Array<WorkPreviewType>,
+	actions: { [key: string]: () => mixed },
+	navigation: NavigationState,
+}
 
 
 const mapStateToProps = (state) => {
@@ -21,18 +29,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-class Recent extends PureComponent {
+class Recent extends PureComponent<Props> {
 	static navigationOptions = {
 		title: 'Recent works',
 	}
 
-
 	constructor(props) {
-		super(props)
+		super(props);
 
-		this.fetchRecent = this.fetchRecent.bind(this)
-		this.renderEmpty = this.renderEmpty.bind(this)
-		this.renderItem = this.renderItem.bind(this)
+		(this:any).fetchRecent = this.fetchRecent.bind(this);
+		(this:any).renderEmpty = this.renderEmpty.bind(this);
+		(this:any).renderItem = this.renderItem.bind(this);
 	}
 
 	fetchRecent() {
@@ -58,7 +65,7 @@ class Recent extends PureComponent {
 
 	render() {
 		return (
-			<View style={styles.scenes}>
+			<View style={styles.scene}>
 				<FlatList
 					data={this.props.works}
 					ListEmptyComponent={this.renderEmpty}

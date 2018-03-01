@@ -7,8 +7,9 @@ import {
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers'
 
-
 import * as routes from './routes'
+import type { State, Action } from '../types'
+import type { NavigationAction } from 'react-navigation'
 
 
 export const AppNavigator = DrawerNavigator(
@@ -24,7 +25,7 @@ const initialState = AppNavigator.router.getStateForAction({
 	type: 'Navigation/NAVIGATE',
 })
 
-export const navReducer = (state = initialState, action) => {
+export const navReducer = (state: ?State = initialState, action: NavigationAction) => {
   const nextState = AppNavigator.router.getStateForAction(action, state)
 
   // Simply return the original `state` if `nextState` is null or undefined.

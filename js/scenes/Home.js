@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { Button, Text, View } from 'react-native'
 
 import styles from '../styles'
+import type { NavigationState } from '../types'
 
-export default class Home extends React.Component {
+type Props = {
+	navigation: NavigationState,
+}
+
+export default class Home extends Component<Props> {
 	static navigationOptions = {
 		title: 'AO3 Unofficial',
 		drawerLabel: 'Home',
