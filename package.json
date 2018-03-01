@@ -27,6 +27,7 @@
     "react-navigation": "^1.2.1",
     "react-navigation-redux-helpers": "^1.0.1",
     "react-redux": "^5.0.7",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sanitize-html": "^1.18.2"
   }
 }

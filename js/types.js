@@ -3,10 +3,33 @@ import type {
   NavigationStateRoute,
 } from 'react-navigation'
 
+export type WorksListLink = {
+  label: string,
+  url: string,
+}
+
 export type WorkPreview = {
   key: string,
+  url: string,
   title: string,
-  author: string,
+  author: WorksListLink,
+  fandoms: Array<WorksListLink>,
+
+  rating: string,
+  warnings: string,
+  category: string,
+  iswip: string,
+
+  publish_date: string,
+  relationships: Array<WorksListLink>,
+  characters: Array<WorksListLink>,
+  tags: Array<WorksListLink>,
+
+  summary: string,
+  language: string,
+  words: number,
+  chapters: string,
+  hits: number,
 }
 
 export type WorksState = {
