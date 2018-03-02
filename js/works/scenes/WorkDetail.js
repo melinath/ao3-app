@@ -8,6 +8,7 @@ import type { WorkPreview, NavigationState } from '../../types'
 
 type Props = {
 	navigation: NavigationScreenProp<NavigationState>,
+	item: WorkPreview,
 }
 
 
@@ -28,7 +29,7 @@ export default class WorkDetail extends Component<Props> {
 		return (
 			<View style={[styles.scene, styles.listItem]}>
 				<Text style={styles.listItemHeader}>{item.title}</Text>
-				<Text>{item.author}</Text>
+				<Text>{item.author.label}</Text>
 			</View>
 		)
 	}
