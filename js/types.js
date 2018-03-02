@@ -12,7 +12,7 @@ export type WorkPreview = {
   key: string,
   url: string,
   title: string,
-  author: WorksListLink,
+  authors: Array<WorksListLink>,
   fandoms: Array<WorksListLink>,
 
   rating: string,

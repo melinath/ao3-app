@@ -4,17 +4,19 @@ import { extractWorkPreviews } from '../utils'
 
 
 describe('extractWorkPreviews', () => {
-  it('extracts data properly', () => {
+  it('extracts data properly (basic)', () => {
     const html = fs.readFileSync(`${__dirname}/data/workPreview-basic.html`, {encoding: 'utf-8'})
     const works = extractWorkPreviews(html)
     expect(works).toEqual([{
       key: 'work_1234567',
       title: 'Title of the work',
       url: '/works/1234567',
-      author: {
-        label: 'authorpseudonym (authorname)',
-        url: '/users/authorname/pseuds/authorpseudonym/works',
-      },
+      authors: [
+        {
+          label: 'authorpseudonym (authorname)',
+          url: '/users/authorname/pseuds/authorpseudonym/works',
+        }
+      ],
 
       fandoms: [{
         label: 'A Fandom (Movies)',
@@ -72,5 +74,19 @@ describe('extractWorkPreviews', () => {
       chapters: '1/?',
       hits: 0,
     }])
+  })
+  it('extracts multiple authors', () => {
+    const html = fs.readFileSync(`${__dirname}/data/workPreview-multi-author.html`, {encoding: 'utf-8'})
+    const works = extractWorkPreviews(html)
+    expect(works[0].authors).toEqual([
+      {
+        label: 'authorpseudonym (authorname)',
+        url: '/users/authorname/pseuds/authorpseudonym/works',
+      },
+      {
+        label: 'author2',
+        url: '/users/author2/pseuds/author2/works',
+      }
+    ])
   })
 })

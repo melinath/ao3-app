@@ -18,11 +18,14 @@ export const extractWorkPreviews = (text: string): Array<WorkPreview> => {
 		work.title = titleElement.text()
 		work.url = titleElement.attr('href')
 
-		const authorElement = $element.find('h4 a').last()
-		work.author = {
-			label: authorElement.text(),
-			url: `${authorElement.attr('href')}/works`,
-		}
+		work.authors = []
+		$element.find('h4 a[rel=author]').each((index, author) => {
+			const $author = $(author)
+			work.authors.push({
+				label: $author.text(),
+				url: `${$author.attr('href')}/works`,
+			})
+		})
 
 		work.fandoms = []
 		$element.find('.fandoms .tag').each((index, fandom) => {

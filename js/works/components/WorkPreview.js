@@ -48,7 +48,7 @@ export default class WorkPreview extends PureComponent<Props> {
 						</View>
 						<View style={{ paddingLeft: 10, paddingRight: 10 }}>
 							<Text style={styles.listItemHeader}>{item.title}</Text>
-							<Text>{item.author.label}</Text>
+							<Text>{item.authors.map(({ label }) => label).join(', ')}</Text>
 						</View>
 					</View>
 				</View>
