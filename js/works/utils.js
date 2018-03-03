@@ -37,8 +37,8 @@ export const extractWorkPreviews = (text: string): Array<WorkPreview> => {
 		})
 
 		work.rating = $element.find('.required-tags .rating').first().text()
-		work.warnings = $element.find('.required-tags .warnings').first().text()
-		work.category = $element.find('.required-tags .category').first().text()
+		work.warnings = $element.find('.required-tags .warnings').first().text().split(', ')
+		work.categories = $element.find('.required-tags .category').first().text().split(', ')
 		work.iswip = $element.find('.required-tags .iswip').first().text()
 
 		work.publish_date = $element.find('.datetime').first().text()

@@ -24,8 +24,8 @@ describe('extractWorkPreviews', () => {
       }],
 
       rating: 'Teen And Up Audiences',
-      warnings: 'Choose Not To Use Archive Warnings',
-      category: 'F/F',
+      warnings: ['Choose Not To Use Archive Warnings'],
+      categories: ['F/F'],
       iswip: 'Work in Progress',
 
       publish_date: '01 Mar 2018',
@@ -87,6 +87,22 @@ describe('extractWorkPreviews', () => {
         label: 'author2',
         url: '/users/author2/pseuds/author2/works',
       }
+    ])
+  })
+  it('extracts multiple categories', () => {
+    const html = fs.readFileSync(`${__dirname}/data/workPreview-multi-category.html`, {encoding: 'utf-8'})
+    const works = extractWorkPreviews(html)
+    expect(works[0].categories).toEqual([
+      'F/M',
+      'Multi',
+    ])
+  })
+  it('extracts multiple warnings', () => {
+    const html = fs.readFileSync(`${__dirname}/data/workPreview-multi-warning.html`, {encoding: 'utf-8'})
+    const works = extractWorkPreviews(html)
+    expect(works[0].warnings).toEqual([
+    'Graphic Depictions Of Violence',
+    'Major Character Death',
     ])
   })
 })

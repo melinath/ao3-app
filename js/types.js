@@ -16,8 +16,8 @@ export type WorkPreview = {
   fandoms: Array<WorksListLink>,
 
   rating: string,
-  warnings: string,
-  category: string,
+  warnings: Array<string>,
+  categories: Array<string>,
   iswip: string,
 
   publish_date: string,

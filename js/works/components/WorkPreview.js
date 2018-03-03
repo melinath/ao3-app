@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { TouchableHighlight, View, Text } from 'react-native'
 import type { NavigationScreenProp } from 'react-navigation'
 
-import Symbol from './Symbol'
+import SymbolBox from './SymbolBox'
 import styles from '../../styles'
 import type { NavigationState, WorkPreview as WorkPreviewType } from '../../types'
 
@@ -36,16 +36,12 @@ export default class WorkPreview extends PureComponent<Props> {
 			>
 				<View style={{minHeight: 50}}>
 					<View style={{flex: 1, flexDirection: 'row'}}>
-						<View style={{width: 50, height: 50, flexDirection: 'column'}}>
-							<View style={{width: 25, flexDirection: 'row'}}>
-								<Symbol tag={item.rating} />
-								<Symbol tag={item.category} />
-							</View>
-							<View style={{width: 25, flexDirection: 'row'}}>
-								<Symbol tag={item.warnings} />
-								<Symbol tag={item.iswip} />
-							</View>
-						</View>
+						<SymbolBox
+							rating={item.rating}
+							categories={item.categories}
+							warnings={item.warnings}
+							iswip={item.iswip}
+						/>
 						<View style={{ paddingLeft: 10, paddingRight: 10 }}>
 							<Text style={styles.listItemHeader}>{item.title}</Text>
 							<Text>{item.authors.map(({ label }) => label).join(', ')}</Text>
