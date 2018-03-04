@@ -32,6 +32,13 @@ export type WorkPreview = {
   hits: number,
 }
 
+export type WorkDetail = {
+  notes: ?string,
+  endNotes: ?string,
+  chapterTitle: ?string,
+  content: string,
+}
+
 export type WorksState = {
   recent?: (
     void | {

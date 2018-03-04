@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StatusBar } from 'react-native'
 import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
 import styles from '../../styles'
-import type { WorkPreview } from '../../types'
+import { extractWorkDetail } from '../utils'
+import type { WorkPreview, WorkDetail as WorkDetailType } from '../../types'
 
 
 type NavigationState = {
-	params?: { item: WorkPreview }
+	params: { item: WorkPreview }
 } & NavigationStateRoute
 
 
@@ -16,24 +17,61 @@ type Props = {
 }
 
 
-export default class WorkDetail extends Component<Props> {
-	static navigationOptions = ({ navigation }: Props) => {
-		const { params } = navigation.state
+type State = {
+	work?: WorkDetailType,
+	isLoading: boolean,
+}
 
-		return {
-			title: params ? params.item.title : 'Work detail',
+
+export default class WorkDetail extends Component<Props, State> {
+	static navigationOptions = { header: null }
+
+	constructor(props: Props) {
+		super(props);
+
+		(this:any).state = {
+			work: null,
+			isLoading: false,
 		}
 	}
 
-	render() {
-		const { params } = this.props.navigation.state
-		if (!params) return null
+	async loadWork() {
+		this.setState({isLoading: true})
+		const { item } = this.props.navigation.state.params
+		const response = await fetch(`https://archiveofourown.org${item.url}`)
+		const responseText = await response.text()
 
-		const { item } = params
+		this.setState({
+			work: extractWorkDetail(responseText),
+			isLoading: false,
+		})
+	}
+
+	componentDidMount() {
+		this.loadWork()
+	}
+
+	render() {
+		const { item: paramsItem } = this.props.navigation.state.params
+		const { work } = this.state
 		return (
-			<View style={[styles.scene, styles.listItem]}>
-				<Text style={styles.listItemHeader}>{item.title}</Text>
-				<Text>{item.authors.map(({ label }) => label).join(', ')}</Text>
+			<View style={{ padding: 10 }}>
+				<StatusBar hidden={true} />
+				<Text>
+					<Text style={{ fontSize: 30 }}>{paramsItem.title}</Text>
+					<Text> by {paramsItem.authors.map(({ label }) => label).join(', ')}</Text>
+				</Text>
+				<Text style={{ fontSize: 20 }}>Summary</Text>
+				<Text>{paramsItem.summary}</Text>
+
+				{work && (
+					<View>
+						<Text style={{ fontSize: 20 }}>Notes</Text>
+						<Text>{work.summary}</Text>
+						<Text style={{ fontSize: 30 }}>{work.chapterTitle}</Text>
+						<Text>{work.content}</Text>
+					</View>
+				)}
 			</View>
 		)
 	}

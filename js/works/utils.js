@@ -1,7 +1,8 @@
 import cheerio from 'react-native-cheerio'
 import sanitizeHTML from 'sanitize-html'
 
-import type { WorkPreview } from '../types'
+import type { WorkPreview, WorkDetail } from '../types'
+
 
 export const extractWorkPreviews = (text: string): Array<WorkPreview> => {
 	const $ = cheerio.load(text)
@@ -94,4 +95,28 @@ export const extractWorkPreviews = (text: string): Array<WorkPreview> => {
 		works.push(work)
 	})
 	return works
+}
+
+export const extractWorkDetail = (text: string): WorkDetail => {
+	const $ = cheerio.load(text)
+
+	const chapterTitle = $('.chapter .title').text().trim()
+	const work = {
+		notes: null,
+		endNotes: null,
+		chapterTitle: chapterTitle ? chapterTitle : null,
+		content: $('#chapters .userstuff p').text().trim(),
+	}
+
+	$('.notes').each((index, element) => {
+		const $element = $(element)
+		const notes = $element.find('.userstuff').text().trim()
+		if ($element.attr('id') === 'work_endnotes') {
+			work.endNotes = notes
+		} else {
+			work.notes = notes
+		}
+	})
+
+	return work
 }
