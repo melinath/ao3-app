@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import type { NavigationScreenProp } from 'react-navigation'
+import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
 import styles from '../../styles'
-import type { WorkPreview, NavigationState } from '../../types'
+import type { WorkPreview } from '../../types'
+
+
+type NavigationState = {
+	params?: { item: WorkPreview }
+} & NavigationStateRoute
 
 
 type Props = {

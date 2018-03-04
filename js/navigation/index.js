@@ -1,23 +1,17 @@
 import {
 	DrawerNavigator,
-	StackNavigator,
 } from 'react-navigation'
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers'
 
-import * as routes from './routes'
+import routes from './routes'
 import type { State, Action } from '../types'
 import type { NavigationAction } from 'react-navigation'
 
 
-export const AppNavigator = DrawerNavigator(
-	{
-		HomeStack: { screen: StackNavigator(routes.home, { initialRouteName: 'Home' }) },
-		RecentStack: { screen: StackNavigator(routes.recent, { initialRouteName: 'Recent' }) },
-	}
-)
+export const AppNavigator = DrawerNavigator(routes)
 
 
 const initialState = AppNavigator.router.getStateForAction({

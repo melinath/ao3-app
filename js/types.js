@@ -41,16 +41,9 @@ export type WorksState = {
   )
 }
 
-type NavigationParams =
-  | { item: WorkPreview }
-
-export type NavigationState = {
-  params?: NavigationParams
-} & NavigationStateRoute
-
 export type State = {
   works: WorksState,
-  nav: NavigationScreenProp<NavigationState>,
+  nav: NavigationScreenProp<NavigationStateRoute>,
 }
 
 export type Action =

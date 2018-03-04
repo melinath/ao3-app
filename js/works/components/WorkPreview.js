@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import { TouchableHighlight, View, Text } from 'react-native'
-import type { NavigationScreenProp } from 'react-navigation'
+import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
 import SymbolBox from './SymbolBox'
 import styles from '../../styles'
-import type { NavigationState, WorkPreview as WorkPreviewType } from '../../types'
+import type { WorkPreview as WorkPreviewType } from '../../types'
 
 type Props = {
 	item: WorkPreviewType,
-	navigation: NavigationScreenProp<NavigationState>,
+	navigation: NavigationScreenProp<NavigationStateRoute>,
 }
 
 
@@ -26,6 +26,7 @@ export default class WorkPreview extends PureComponent<Props> {
 	render() {
 		const {
 			item,
+			navigation,
 		} = this.props
 
 		return (
@@ -41,6 +42,7 @@ export default class WorkPreview extends PureComponent<Props> {
 							categories={item.categories}
 							warnings={item.warnings}
 							iswip={item.iswip}
+							navigation={navigation}
 						/>
 						<View style={{ paddingLeft: 10, paddingRight: 10 }}>
 							<Text style={styles.listItemHeader}>{item.title}</Text>
