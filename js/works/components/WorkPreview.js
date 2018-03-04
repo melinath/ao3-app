@@ -45,8 +45,19 @@ export default class WorkPreview extends PureComponent<Props> {
 							navigation={navigation}
 						/>
 						<View style={{ paddingLeft: 10, paddingRight: 10, flex: 1 }}>
-							<Text style={styles.listItemHeader}>{item.title}</Text>
-							<Text>{item.authors.map(({ label }) => label).join(', ')}</Text>
+							<Text>
+								<Text style={styles.listItemHeader}>{item.title}</Text>
+								{item.authors.length && (
+									<Text> by {item.authors.map(({ label }) => label).join(', ')}</Text>
+								)}
+							</Text>
+							<Text>{item.fandoms.map(({ label }) => label).join(', ')}</Text>
+							<Text>
+								<Text style={{ fontWeight: 'bold' }}>{item.warnings.map(({ label }) => label).join(', ')}, </Text>
+								{item.relationships.length ? <Text>{item.relationships.map(({ label }) => label).join(', ')}</Text> : null}
+								{item.characters.length ? <Text>{item.characters.map(({ label }) => label).join(', ')}</Text> : null}
+								{item.tags.length ? <Text>{item.tags.map(({ label }) => label).join(', ')}</Text> : null}
+							</Text>
 						</View>
 					</View>
 				</View>

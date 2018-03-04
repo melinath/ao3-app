@@ -37,11 +37,19 @@ export const extractWorkPreviews = (text: string): Array<WorkPreview> => {
 		})
 
 		work.rating = $element.find('.required-tags .rating').first().text()
-		work.warnings = $element.find('.required-tags .warnings').first().text().split(', ')
 		work.categories = $element.find('.required-tags .category').first().text().split(', ')
 		work.iswip = $element.find('.required-tags .iswip').first().text()
 
 		work.publish_date = $element.find('.datetime').first().text()
+
+		work.warnings = []
+		$element.find('ul.tags .warnings .tag').each((index, warning) => {
+			const $warning = $(warning)
+			work.warnings.push({
+				label: $warning.text(),
+				url: $warning.attr('href'),
+			})
+		})
 
 		work.relationships = []
 		$element.find('ul.tags .relationships .tag').each((index, relationship) => {

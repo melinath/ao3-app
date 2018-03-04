@@ -2,11 +2,13 @@ import React, { PureComponent } from 'react'
 import { Image, TouchableHighlight, View, Text } from 'react-native'
 import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
+import type { WorksListLink } from '../../types'
+
 
 type Props = {
   rating: string,
   categories: Array<string>,
-  warnings: Array<string>,
+  warnings: Array<WorksListLink>,
   iswip: string,
 	navigation: NavigationScreenProp<NavigationStateRoute>,
 }
@@ -123,8 +125,8 @@ export default class SymbolBox extends PureComponent<Props> {
     const category = categories.length > 1 ? 'Multi' : categories[0]
 
     let warning = 'Archive Warnings Apply'
-    if (warnings.length == 1 && WARNINGS[warnings[0]]) {
-      warning = warnings[0]
+    if (warnings.length == 1 && WARNINGS[warnings[0].label]) {
+      warning = warnings[0].label
     }
 
     return {

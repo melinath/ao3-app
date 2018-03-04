@@ -24,7 +24,12 @@ describe('extractWorkPreviews', () => {
       }],
 
       rating: 'Teen And Up Audiences',
-      warnings: ['Choose Not To Use Archive Warnings'],
+      warnings: [
+        {
+          label: 'Choose Not To Use Archive Warnings',
+          url: '/tags/Choose%20Not%20To%20Use%20Archive%20Warnings/works',
+        },
+      ],
       categories: ['F/F'],
       iswip: 'Work in Progress',
 
