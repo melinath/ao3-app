@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar } from 'react-native'
+import { Text, View, StatusBar, ScrollView } from 'react-native'
 import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
 import styles from '../../styles'
@@ -55,24 +55,39 @@ export default class WorkDetail extends Component<Props, State> {
 		const { item: paramsItem } = this.props.navigation.state.params
 		const { work } = this.state
 		return (
-			<View style={{ padding: 10 }}>
-				<StatusBar hidden={true} />
-				<Text>
-					<Text style={{ fontSize: 30 }}>{paramsItem.title}</Text>
-					<Text> by {paramsItem.authors.map(({ label }) => label).join(', ')}</Text>
-				</Text>
-				<Text style={{ fontSize: 20 }}>Summary</Text>
-				<Text>{paramsItem.summary}</Text>
+			<ScrollView>
+				<View style={{ padding: 10 }}>
+					<StatusBar hidden={true} />
+					<Text>
+						<Text style={{ fontSize: 30 }}>{paramsItem.title}</Text>
+						<Text> by {paramsItem.authors.map(({ label }) => label).join(', ')}</Text>
+					</Text>
 
-				{work && (
-					<View>
-						<Text style={{ fontSize: 20 }}>Notes</Text>
-						<Text>{work.summary}</Text>
-						<Text style={{ fontSize: 30 }}>{work.chapterTitle}</Text>
-						<Text>{work.content}</Text>
+					<View style={{ paddingBottom: 10 }}>
+						<Text style={{ fontSize: 20 }}>Summary</Text>
+						<Text>{paramsItem.summary}</Text>
 					</View>
-				)}
-			</View>
+
+					{work && work.notes && (
+						<View style={{ paddingBottom: 10 }}>
+							<Text style={{ fontSize: 20 }}>Notes</Text>
+							<Text>{work.notes}</Text>
+						</View>
+					)}
+					{work && (
+						<View>
+							{work.chapterTitle && <Text style={{ fontSize: 30 }}>{work.chapterTitle}</Text>}
+							<Text>{work.content}</Text>
+						</View>
+					)}
+					{work && work.endNotes && (
+						<View>
+							<Text style={{ fontSize: 20 }}>Notes</Text>
+							<Text>{work.endNotes}</Text>
+						</View>
+					)}
+				</View>
+			</ScrollView>
 		)
 	}
 }
