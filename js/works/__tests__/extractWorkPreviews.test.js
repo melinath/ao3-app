@@ -26,7 +26,7 @@ describe('extractWorkPreviews', () => {
       rating: 'Teen And Up Audiences',
       warnings: [
         {
-          label: 'Choose Not To Use Archive Warnings',
+          label: 'Creator Chose Not To Use Archive Warnings',
           url: '/tags/Choose%20Not%20To%20Use%20Archive%20Warnings/works',
         },
       ],
@@ -106,8 +106,14 @@ describe('extractWorkPreviews', () => {
     const html = fs.readFileSync(`${__dirname}/data/workPreview-multi-warning.html`, {encoding: 'utf-8'})
     const works = extractWorkPreviews(html)
     expect(works[0].warnings).toEqual([
-    'Graphic Depictions Of Violence',
-    'Major Character Death',
+      {
+        label: 'Graphic Depictions Of Violence',
+        url: '/tags/Graphic%20Depictions%20Of%20Violence/works',
+      },
+      {
+        label: 'Major Character Death',
+        url: '/tags/Major%20Character%20Death/works',
+      },
     ])
   })
 })
