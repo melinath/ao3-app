@@ -37,13 +37,16 @@ export default class WorkPreview extends PureComponent<Props> {
 			>
 				<View style={{minHeight: 50}}>
 					<View style={{flex: 1, flexDirection: 'row'}}>
-						<SymbolBox
-							rating={item.rating}
-							categories={item.categories}
-							warnings={item.warnings}
-							iswip={item.iswip}
-							navigation={navigation}
-						/>
+						<View style={{width: 50}}>
+							<SymbolBox
+								rating={item.rating}
+								categories={item.categories}
+								warnings={item.warnings}
+								iswip={item.iswip}
+								navigation={navigation}
+							/>
+							<Text>{item.publish_date}</Text>
+						</View>
 						<View style={{ paddingLeft: 10, paddingRight: 10, flex: 1 }}>
 							<Text>
 								<Text style={styles.listItemHeader}>{item.title}</Text>
@@ -75,6 +78,12 @@ export default class WorkPreview extends PureComponent<Props> {
 									</ExpandableText>
 								</View>
 							) : null}
+							<View style={{flexWrap: 'wrap', flexDirection: 'row', paddingTop: 5}}>
+								<View style={{paddingRight: 10}}><Text>Language: {item.language}</Text></View>
+								<View style={{paddingRight: 10}}><Text>Words: {item.words}</Text></View>
+								{item.chapters ? <View style={{paddingRight: 10}}><Text>Chapters: {item.chapters}</Text></View> : null}
+								<View style={{paddingRight: 10}}><Text>Hits: {item.hits}</Text></View>
+							</View>
 						</View>
 					</View>
 				</View>
