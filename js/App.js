@@ -24,6 +24,19 @@ type Props = {
 	dispatch: Dispatch,
 }
 
+// gets the current screen from navigation state
+function getCurrentRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return getCurrentRouteName(route);
+  }
+  return route.routeName;
+}
+
 
 class AppWithNavigationState extends Component<Props> {
 	constructor(props) {
@@ -42,18 +55,10 @@ class AppWithNavigationState extends Component<Props> {
 
   onBackPress = () => {
     const { dispatch, nav } = this.props
-    if (nav.index !== 0) {
-	    dispatch(NavigationActions.back({ key: null }))
-			return true
-    }
-
-		const stackNavigators = nav.routes[0].routes
-		if (stackNavigators.some(nav => nav.index !== 0)) {
-	    dispatch(NavigationActions.back({ key: null }))
-			return true
-		}
-
-		return false
+		const currentRouteName = getCurrentRouteName(nav)
+		if (currentRouteName === 'Home') return false
+    dispatch(NavigationActions.back({ key: null }))
+		return true
   }
 
 	render() {
