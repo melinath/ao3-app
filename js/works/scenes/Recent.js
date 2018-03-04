@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
-import { FlatList, Button, Text, View } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
 
 import WorkPreview from '../components/WorkPreview'
+import WorksList from '../components/WorksList'
 import styles from '../../styles'
 import { loadRecentWorks } from '../actions'
 import type { WorkPreview as WorkPreviewType } from '../../types'
@@ -39,8 +40,6 @@ class Recent extends PureComponent<Props> {
 		super(props);
 
 		(this:any).fetchRecent = this.fetchRecent.bind(this);
-		(this:any).renderEmpty = this.renderEmpty.bind(this);
-		(this:any).renderItem = this.renderItem.bind(this);
 	}
 
 	fetchRecent() {
@@ -51,28 +50,14 @@ class Recent extends PureComponent<Props> {
 		this.fetchRecent()
 	}
 
-	renderEmpty() {
-		if (this.props.isLoading) return null
-		return (
-			<Text style={[styles.paragraph, {paddingTop: 10}]}>
-				No works found
-			</Text>
-		)
-	}
-
-	renderItem({ item }) {
-		return <WorkPreview item={item} navigation={this.props.navigation} />
-	}
-
 	render() {
 		return (
 			<View style={styles.scene}>
-				<FlatList
-					data={this.props.works}
-					ListEmptyComponent={this.renderEmpty}
+				<WorksList
+					isLoading={this.props.isLoading || false}
+					navigation={this.props.navigation}
 					onRefresh={this.fetchRecent}
-					renderItem={this.renderItem}
-					refreshing={this.props.isLoading || false}
+					works={this.props.works}
 				/>
 			</View>
 		)
