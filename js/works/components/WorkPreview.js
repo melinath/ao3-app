@@ -44,7 +44,7 @@ export default class WorkPreview extends PureComponent<Props> {
 							iswip={item.iswip}
 							navigation={navigation}
 						/>
-						<View style={{ paddingLeft: 10, paddingRight: 10 }}>
+						<View style={{ paddingLeft: 10, paddingRight: 10, flex: 1 }}>
 							<Text style={styles.listItemHeader}>{item.title}</Text>
 							<Text>{item.authors.map(({ label }) => label).join(', ')}</Text>
 						</View>
