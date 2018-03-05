@@ -10,7 +10,7 @@ describe('extractWorkDetail', () => {
       notes: 'These are notes',
       endNotes: 'These are endnotes',
       chapterTitle: null,
-      content: 'Contents',
+      content: '<p>Contents</p><p>And more contents</p>',
     })
   })
 
@@ -21,7 +21,7 @@ describe('extractWorkDetail', () => {
       notes: null,
       endNotes: null,
       chapterTitle: 'Chapter 1: Chapter title',
-      content: 'Contents',
+      content: '<p>Contents</p>',
     })
   })
 })

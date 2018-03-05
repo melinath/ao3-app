@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar, ScrollView } from 'react-native'
+import { Text, View, StatusBar, ScrollView, WebView, StyleSheet } from 'react-native'
 import type { NavigationScreenProp, NavigationStateRoute } from 'react-navigation'
+
+import HTMLView from 'react-native-htmlview'
 
 import styles from '../../styles'
 import { extractWorkDetail } from '../utils'
@@ -58,10 +60,8 @@ export default class WorkDetail extends Component<Props, State> {
 			<ScrollView>
 				<View style={{ padding: 10 }}>
 					<StatusBar hidden={true} />
-					<Text>
-						<Text style={{ fontSize: 30 }}>{paramsItem.title}</Text>
-						<Text> by {paramsItem.authors.map(({ label }) => label).join(', ')}</Text>
-					</Text>
+					<Text style={{ fontSize: 30 }}>{paramsItem.title}</Text>
+					<Text>by {paramsItem.authors.map(({ label }) => label).join(', ')}</Text>
 
 					<View style={{ paddingBottom: 10 }}>
 						<Text style={{ fontSize: 20 }}>Summary</Text>
@@ -75,9 +75,9 @@ export default class WorkDetail extends Component<Props, State> {
 						</View>
 					)}
 					{work && (
-						<View>
-							{work.chapterTitle && <Text style={{ fontSize: 30 }}>{work.chapterTitle}</Text>}
-							<Text>{work.content}</Text>
+						<View style={{ borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: 'black', paddingTop: 10 }}>
+							{work.chapterTitle && <Text style={{ fontSize: 25 }}>{work.chapterTitle}</Text>}
+							<HTMLView value={work.content} />
 						</View>
 					)}
 					{work && work.endNotes && (

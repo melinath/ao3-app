@@ -101,11 +101,17 @@ export const extractWorkDetail = (text: string): WorkDetail => {
 	const $ = cheerio.load(text)
 
 	const chapterTitle = $('.chapter .title').text().trim()
+
+	let content = ''
+	$('#chapters .userstuff p').map((index, element) => {
+		content += $.html(element)
+	})
+
 	const work = {
 		notes: null,
 		endNotes: null,
 		chapterTitle: chapterTitle ? chapterTitle : null,
-		content: $('#chapters .userstuff p').text().trim(),
+		content,
 	}
 
 	$('.notes').each((index, element) => {
