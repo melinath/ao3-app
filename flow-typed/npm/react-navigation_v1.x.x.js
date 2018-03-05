@@ -1,5 +1,5 @@
-// flow-typed signature: ecb76745a94f4ec4dff2ff9090351482
-// flow-typed version: 23b9c2c70c/react-navigation_v1.x.x/flow_>=v0.60.x
+// flow-typed signature: 6d5799d5f505f5928402c7b16fe939b1
+// flow-typed version: 84449de6b4/react-navigation_v1.x.x/flow_>=v0.60.x
 
 // @flow
 
@@ -752,7 +752,7 @@ declare module 'react-navigation' {
     SET_PARAMS: 'Navigation/SET_PARAMS',
     URI: 'Navigation/URI',
     back: {
-      (payload: { key?: ?string }): NavigationBackAction,
+      (payload?: { key?: ?string }): NavigationBackAction,
       toString: () => string,
     },
     init: {
@@ -832,6 +832,8 @@ declare module 'react-navigation' {
   declare type _TabNavigatorConfig = {|
     ...NavigationTabRouterConfig,
     ..._TabViewConfig,
+    lazy?: boolean,
+    removeClippedSubviews?: boolean,
     containerOptions?: void,
   |};
   declare export function TabNavigator(
@@ -947,7 +949,7 @@ declare module 'react-navigation' {
       vertical?: _SafeAreaViewForceInsetValue,
       horizontal?: _SafeAreaViewForceInsetValue,
     },
-    children: React$Node,
+    children?: React$Node,
     style?: AnimatedViewStyleProp,
   };
   declare export var SafeAreaView: React$ComponentType<_SafeAreaViewProps>;
@@ -1099,7 +1101,7 @@ declare module 'react-navigation' {
   declare export var TabBarBottom: React$ComponentType<_TabBarBottomProps>;
 
   declare type _NavigationInjectedProps = {
-    navigation: NavigationScreenProp<NavigationState>,
+    navigation: NavigationScreenProp<NavigationStateRoute>,
   };
   declare export function withNavigation<T: {}>(
     Component: React$ComponentType<T & _NavigationInjectedProps>
