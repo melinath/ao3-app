@@ -1,5 +1,5 @@
-// flow-typed signature: 6d5799d5f505f5928402c7b16fe939b1
-// flow-typed version: 84449de6b4/react-navigation_v1.x.x/flow_>=v0.60.x
+// flow-typed signature: bd2c69866f7180eb05f435316ca832a4
+// flow-typed version: 6475dcc6d1/react-navigation_v1.x.x/flow_>=v0.60.x
 
 // @flow
 
@@ -581,7 +581,7 @@ declare module 'react-navigation' {
 
   declare export type NavigationContainerProps<S: {}, O: {}> = $Shape<{
     uriPrefix?: string | RegExp,
-    onNavigationStateChange?: (
+    onNavigationStateChange?: ?(
       NavigationState,
       NavigationState,
       NavigationAction
