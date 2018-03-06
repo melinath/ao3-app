@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 	return state.works.recent || {}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
 		actions: bindActionCreators({
 			loadRecentWorks,

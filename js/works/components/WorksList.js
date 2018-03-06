@@ -13,7 +13,7 @@ import type { WorkPreview as WorkPreviewType } from '../../types'
 type Props = {
 	works: Array<WorkPreviewType>,
 	navigation: NavigationScreenProp<NavigationStateRoute>,
-  onRefresh: () => void,
+  onRefresh?: () => void,
 }
 
 
@@ -27,6 +27,7 @@ export default class WorksList extends PureComponent<Props> {
 
 	renderEmpty() {
 		if (this.props.isLoading) return null
+		if (!this.props.works) return null
 		return (
 			<Text style={[styles.paragraph, {paddingTop: 10}]}>
 				No works found
@@ -40,7 +41,7 @@ export default class WorksList extends PureComponent<Props> {
 
 	render() {
 		return (
-			<View style={styles.scene}>
+			<View style={{flex: 1}}>
 				<FlatList
 					data={this.props.works}
 					ListEmptyComponent={this.renderEmpty}

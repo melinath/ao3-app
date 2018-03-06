@@ -3,6 +3,17 @@ import type {
   NavigationStateRoute,
 } from 'react-navigation'
 
+export type SearchParams = {
+  query?: string,
+  title?: string,
+  creator?: string,
+  revised_at?: string,
+  complete?: boolean,
+  single_chapter?: boolean,
+  word_count?: string,
+  language_id?: number,
+}
+
 export type WorksListLink = {
   label: string,
   url: string,
@@ -41,6 +52,12 @@ export type WorkDetail = {
 
 export type WorksState = {
   recent?: (
+    void | {
+      isLoading: boolean,
+      works?: Array<WorkPreview>,
+    }
+  ),
+  search?: (
     void | {
       isLoading: boolean,
       works?: Array<WorkPreview>,

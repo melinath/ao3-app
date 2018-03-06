@@ -4,6 +4,7 @@ import {
 
 import Home from '../scenes/Home'
 import Recent from '../works/scenes/Recent'
+import Search from '../works/scenes/Search'
 import WorkDetail from '../works/scenes/WorkDetail'
 import SymbolModal from '../works/scenes/SymbolModal'
 
@@ -35,7 +36,7 @@ const routes = {
 	RecentStack: {
 		screen: StackNavigator(
 			{
-				NestedHomeStack: {
+				NestedRecentStack: {
 					screen: StackNavigator(
 						{
 							Recent: { screen: Recent },
@@ -43,6 +44,28 @@ const routes = {
 						},
 						{
 							initialRouteName: 'Recent'
+						},
+					),
+				},
+				SymbolModal: { screen: SymbolModal },
+			},
+			{
+				mode: 'modal',
+				headerMode: 'none',
+			}
+		),
+	},
+	SearchStack: {
+		screen: StackNavigator(
+			{
+				NestedSearchStack: {
+					screen: StackNavigator(
+						{
+							Search: { screen: Search },
+							WorkDetail: { screen: WorkDetail },
+						},
+						{
+							initialRouteName: 'Search',
 						},
 					),
 				},

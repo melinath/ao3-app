@@ -1,4 +1,8 @@
+const baseFontSize = 15
+
 const styles = {
+	baseFontSize,
+
 	scene: {
 		flex: 1,
 		height: '100%',
@@ -27,6 +31,13 @@ const styles = {
 		fontSize: 18,
 		fontWeight: 'bold',
 	},
+
+	forms: {
+		label: {
+			fontSize: baseFontSize,
+			fontWeight: 'bold',
+		}
+	}
 }
 
 export default styles

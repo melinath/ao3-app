@@ -15,6 +15,17 @@ export const worksReducer = (state: ?WorksState = initialState, action: Action) 
       isLoading: false,
       works: action.works,
     }
+  } else if (action.type === 'LOADING_SEARCH_WORKS') {
+    newState.search = {
+      isLoading: true,
+    }
+  } else if (action.type === 'LOADED_SEARCH_WORKS') {
+    newState.search = {
+      isLoading: false,
+      works: action.works,
+    }
+  } else if (action.type === 'CLEAR_SEARCH_WORKS') {
+    newState.search = undefined
   }
   return newState
 }
